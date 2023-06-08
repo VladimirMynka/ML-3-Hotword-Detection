@@ -2,11 +2,11 @@ import logging
 
 from fire import Fire
 from src.config.config import config
-from src.realtime_listening.listener import Listener
-from src.train.train_pipeline import TrainPipeline
-from src.utils import init_logging
+from src.pipelines.realtime_listening.listener import Listener
+from src.pipelines.train.train_pipeline import TrainPipeline
+from src.pipelines.utils import init_logging
 
-from src.dataset_preparation.prepare_dataset_pipeline import PrepareDatasetPipeline
+from src.pipelines.dataset_preparation.prepare_dataset_pipeline import PrepareDatasetPipeline
 
 
 class Pipelines:

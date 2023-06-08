@@ -2,9 +2,9 @@ import logging
 import time
 from datetime import datetime
 from logging import Logger
-from tqdm import tqdm
 
 import requests
+from tqdm import tqdm
 
 from src.config.classes import ListenConfig
 
@@ -57,4 +57,3 @@ class Listener:
 
         self.connected = True
         return response
-

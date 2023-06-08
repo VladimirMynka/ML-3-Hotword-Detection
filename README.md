@@ -22,7 +22,9 @@ Available pipeline names:
 Dataset have next structure:
 
 ~/data/dataset/wavs/ — folder with one-second pieces of audio
+
 ~/data/dataset/train.csv — train .csv file, contains paths to audio (relative of project root) and labels: have it hot-word or not
+
 ~/data/dataset/val.csv — as train.csv but for validation
 
 

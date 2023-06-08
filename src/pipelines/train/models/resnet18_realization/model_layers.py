@@ -8,6 +8,7 @@ class ConvNorm(nn.Module):
     """
     Simple union of convolutional layer and batch normalization
     """
+
     def __init__(self, in_channels: int, out_channels: int, kernel: int = 3, div2: bool = False, padding: int = 1):
         super(ConvNorm, self).__init__()
 

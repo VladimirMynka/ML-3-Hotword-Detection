@@ -1,5 +1,6 @@
-from src.config.classes import LoggerConfig
 import logging
+
+from src.config.classes import LoggerConfig
 
 
 def init_logging(config: LoggerConfig = None):

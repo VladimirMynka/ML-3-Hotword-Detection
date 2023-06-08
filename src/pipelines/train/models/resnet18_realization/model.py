@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-import src.train.models.resnet18_realization.model_layers as layers
+import src.pipelines.train.models.resnet18_realization.model_layers as layers
 
 
 class Model(nn.Module):

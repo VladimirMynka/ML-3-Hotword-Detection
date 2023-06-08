@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from src.config.classes import DatasetCreatorConfig, LoggerConfig, TrainConfig, ListenConfig
 
 

@@ -7,7 +7,7 @@ import torch
 import torchaudio
 from tqdm import trange
 
-from src.abstract_pipeline import AbstractPipeline
+from src.pipelines.abstract_pipeline import AbstractPipeline
 from src.config.classes import DatasetCreatorConfig
 
 

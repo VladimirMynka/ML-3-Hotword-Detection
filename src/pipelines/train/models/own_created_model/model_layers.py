@@ -1,4 +1,4 @@
-from torch import nn, Tensor
+from torch import nn
 
 
 class ConvAndPooling(nn.Module):
@@ -7,6 +7,7 @@ class ConvAndPooling(nn.Module):
     ReLU: (out_channels, H, W) -> (out_channels, H, W)
     MaxPool2D: (out_channels, H, W) -> (out_channels, H // stride[0] + 1, W // stride[1] + 1)
     """
+
     def __init__(self, in_channels: int, out_channels: int, pool_stride: int | tuple = 2):
         super(ConvAndPooling, self).__init__()
 
@@ -24,6 +25,7 @@ class ConvAndBatchNormalization(nn.Module):
     BatchNormalization: (out_channels, H, W) -> (out_channels, H, W)
     ReLU: (out_channels, H, W) -> (out_channels, H, W)
     """
+
     def __init__(self, in_channels: int, out_channels: int):
         super(ConvAndBatchNormalization, self).__init__()
 
@@ -40,6 +42,7 @@ class ConvPoolAndConvNorm(nn.Module):
     ConvAndPooling: (in_channels, H, W) -> (out_channels, H // 2, W // 2)
     ConvAndBatchNormalization: (out_channels, H // 2, W // 2) -> (out_channels, H // 2, W // 2)
     """
+
     def __init__(self, in_channels, out_channels, pool_stride: int | tuple = 2):
         super(ConvPoolAndConvNorm, self).__init__()
 

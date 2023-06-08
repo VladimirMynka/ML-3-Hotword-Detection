@@ -1,16 +1,16 @@
 import os
 from logging import Logger
 
-import torch.optim
-from tqdm import tqdm
 import pandas as pd
+import torch.optim
 from torch import nn
 from torch.utils.data import DataLoader
+from tqdm import tqdm
 
-from src.abstract_pipeline import AbstractPipeline
+from src.pipelines.abstract_pipeline import AbstractPipeline
+from src.pipelines.train.models.resnet18_realization.model import Model
+from src.pipelines.train.wav_dataset import WavDataset
 from src.config.classes import TrainConfig
-from src.train.wav_dataset import WavDataset
-from src.train.models.resnet18_realization.model import Model
 
 
 class TrainPipeline(AbstractPipeline):
