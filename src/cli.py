@@ -3,6 +3,7 @@ import logging
 from fire import Fire
 from src.config.config import config
 from src.realtime_listening.listener import Listener
+from src.train.train_pipeline import TrainPipeline
 from src.utils import init_logging
 
 from src.dataset_preparation.prepare_dataset_pipeline import PrepareDatasetPipeline
@@ -19,6 +20,10 @@ class Pipelines:
 
     def get_stream(self):
         pipeline = Listener(config.listen_config, logger=self.logger)
+        pipeline.run()
+
+    def train(self):
+        pipeline = TrainPipeline(config.train_config, logger=self.logger)
         pipeline.run()
 
 

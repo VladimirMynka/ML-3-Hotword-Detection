@@ -31,4 +31,6 @@ class Model(nn.Module):
         self.classifier = nn.Linear(512, 2)
 
     def forward(self, x: torch.Tensor):
-        return self.classifier(self.image_decoder(x))
+        x = self.image_decoder(x)
+        x = torch.squeeze(x, (2, 3))
+        return self.classifier(x)

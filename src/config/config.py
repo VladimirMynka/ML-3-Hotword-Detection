@@ -17,9 +17,16 @@ config = Config(
     train_config=TrainConfig(
         batch_size=1,
         device='cpu',
+        n_epochs=5,
+
         train_path='data/dataset/train.csv',
         val_path='data/dataset/val.csv',
+
+        model_save_path='data/model/model.pt',
+
         learning_rate=1e-05,
+        gamma=0.98,
+
         n_fft=1023
     ),
 

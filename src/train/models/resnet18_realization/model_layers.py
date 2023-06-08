@@ -8,10 +8,16 @@ class ConvNorm(nn.Module):
     """
     Simple union of convolutional layer and batch normalization
     """
-    def __init__(self, in_channels: int, out_channels: int, kernel: int = 3, div2: bool = False):
+    def __init__(self, in_channels: int, out_channels: int, kernel: int = 3, div2: bool = False, padding: int = 1):
         super(ConvNorm, self).__init__()
 
-        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=kernel, stride=2 if div2 else 1)
+        self.conv = nn.Conv2d(
+            in_channels,
+            out_channels,
+            kernel_size=kernel,
+            stride=2 if div2 else 1,
+            padding=padding
+        )
         self.norm = nn.BatchNorm2d(out_channels)
 
     def forward(self, x):
@@ -25,7 +31,6 @@ class BaseLayer(nn.Module):
 
         :param in_channels: input will be with shape (batch_size, in_channels, H, W)
         :param out_channels: output will be with shape (batch_size, out_channels, H, W)
-        :param config: array of dicts in form {'kernel_size': int, 'div2': bool}
         """
         super(BaseLayer, self).__init__()
 
@@ -50,15 +55,14 @@ class BaseLayerWithDownSample(nn.Module):
 
         :param in_channels: input will be with shape (batch_size, in_channels, H, W)
         :param out_channels: output will be with shape (batch_size, out_channels, H, W)
-        :param config: array of dicts in form {'kernel_size': int, 'div2': bool}
         """
         super(BaseLayerWithDownSample, self).__init__()
 
         self.main = BaseLayer(in_channels, out_channels, div2=True)
-        self.down_sample = ConvNorm(in_channels, out_channels, kernel=1, div2=True)
+        self.down_sample = ConvNorm(in_channels, out_channels, kernel=1, div2=True, padding=0)
         self.relu = nn.ReLU()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        out, _ = self.main(x)
+        out = self.main(x)
         out2 = self.down_sample(x)
-        return self.relu(self.out + out2)
+        return self.relu(out + out2)
