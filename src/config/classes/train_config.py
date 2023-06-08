@@ -10,7 +10,8 @@ class TrainConfig:
     train_path: str
     val_path: str
 
-    model_save_path: str
+    model_save_folder: str
+    model_save_name: str
 
     learning_rate: float
     gamma: float

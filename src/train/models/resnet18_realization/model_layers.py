@@ -63,6 +63,6 @@ class BaseLayerWithDownSample(nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        out = self.main(x)
+        out = self.main(x, do_warning=False)
         out2 = self.down_sample(x)
         return self.relu(out + out2)

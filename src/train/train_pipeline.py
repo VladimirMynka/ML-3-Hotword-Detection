@@ -144,20 +144,21 @@ class TrainPipeline(AbstractPipeline):
             self.logger.info(f"Epoch {epoch}...")
 
             loss, acc = self.train_epoch(train_loader, model, criterion, optimizer, scheduler)
-            self.logger.info(f"Accuracy: {acc}, Loss: {loss}")
+            self.logger.info(f"TRAIN. Accuracy: {acc}, Loss: {loss}")
 
             with torch.no_grad():
                 loss, acc = self.val_epoch(val_loader, model, criterion)
-                self.logger.info(f"Accuracy: {acc}, Loss: {loss}")
+                self.logger.info(f"VALIDATION. Accuracy: {acc}, Loss: {loss}")
 
                 if acc > best_acc:
+                    best_acc = acc
                     self.save_model(model)
 
     def save_model(self, model: nn.Module):
-        os.makedirs(self.config.model_save_path, exist_ok=True)
+        os.makedirs(self.config.model_save_folder, exist_ok=True)
 
         self.logger.info("Saving model...")
 
-        torch.save(model, self.config.model_save_path)
+        torch.save(model, os.path.join(self.config.model_save_folder, self.config.model_save_name))
 
         self.logger.info("Model saved!")
