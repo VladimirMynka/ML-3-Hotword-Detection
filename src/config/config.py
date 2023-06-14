@@ -2,16 +2,17 @@ from src.config.classes import (
     Config,
     DatasetCreatorConfig,
     LoggerConfig,
-    TrainConfig, ListenConfig
+    TrainConfig, ListenConfig, StaticAudioConfig
 )
 
 config = Config(
     dataset_creator_config=DatasetCreatorConfig(
         raw_audio="data/raw_data/thanos_message.wav",
         hotkey_folder="data/raw_data/stones",
-        dataset_size=3000,
+        dataset_size=2000,
         output_folder="data/dataset",
-        train_val_split_k=0.7
+        train_val_split_k=0.7,
+        shift_coefficient=0.25
     ),
 
     train_config=TrainConfig(
@@ -28,7 +29,8 @@ config = Config(
         learning_rate=1e-05,
         gamma=0.98,
 
-        n_fft=1023
+        n_fft=1023,
+        size=(224, 224)
     ),
 
     listen_config=ListenConfig(
@@ -37,6 +39,19 @@ config = Config(
         retries=100,
         sleep_time=10,
         output="data/night_stream.wav"
+    ),
+
+    static_audio_config=StaticAudioConfig(
+        path_to_audio="data/raw_data/thanos_message.wav",
+        secs_step=1.0,
+        secs_window=1.0,
+        save_audio_length=2.2,
+        threshold=0.999,
+        save_to="data/output/static_audio/",
+
+        path_to_model="data/model/model.pt",
+        n_ftt=1023,
+        size=(224, 224)
     ),
 
     logger_config=LoggerConfig(

@@ -1,0 +1,1 @@
+from .hot_write_recognizer import HotWriteRecognizer

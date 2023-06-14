@@ -5,6 +5,7 @@ from src.config.config import config
 from src.pipelines.realtime_listening.listener import Listener
 from src.pipelines.train.train_pipeline import TrainPipeline
 from src.pipelines.utils import init_logging
+from src.pipelines.static_audio_processing import HotWriteRecognizer
 
 from src.pipelines.dataset_preparation.prepare_dataset_pipeline import PrepareDatasetPipeline
 
@@ -32,9 +33,15 @@ class Pipelines:
     def train(self):
         """
         Train hot-words recognize model
-        :return:
         """
         pipeline = TrainPipeline(config.train_config, logger=self.logger)
+        pipeline.run()
+
+    def static_audio_process(self):
+        """
+
+        """
+        pipeline = HotWriteRecognizer(config.static_audio_config, logger=self.logger)
         pipeline.run()
 
 

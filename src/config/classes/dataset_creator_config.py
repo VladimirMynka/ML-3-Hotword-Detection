@@ -10,3 +10,4 @@ class DatasetCreatorConfig:
 
     output_folder: str | os.PathLike
     train_val_split_k: float
+    shift_coefficient: float

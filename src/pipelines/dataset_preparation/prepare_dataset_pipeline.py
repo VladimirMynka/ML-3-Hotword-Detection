@@ -66,7 +66,8 @@ class PrepareDatasetPipeline(AbstractPipeline):
         do_apply_hotkeys = (random.random() > 0.5)
         if do_apply_hotkeys:
             hotkey = self.get_random_hotkey_sound()
-            shift = random.randint(-len(hotkey) // 2, len(hotkey) // 2)
+            max_shift = int(self.config.shift_coefficient * len(hotkey))
+            shift = random.randint(-max_shift, max_shift)
             one_second = self.apply_hotkey(one_second, hotkey, shift)
 
         return one_second, int(do_apply_hotkeys)

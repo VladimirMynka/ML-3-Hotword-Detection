@@ -30,7 +30,7 @@ class TrainPipeline(AbstractPipeline):
 
         train_df, val_df = [pd.read_csv(path) for path in [train_path, val_path]]
         train_dataset, val_dataset = [
-            WavDataset(df, self.config.n_fft, self.logger)
+            WavDataset(df, self.config.n_fft, self.config.size, self.logger)
             for df in [train_df.iloc[:], val_df.iloc[:]]
         ]
 
@@ -159,6 +159,6 @@ class TrainPipeline(AbstractPipeline):
 
         self.logger.info("Saving model...")
 
-        torch.save(model, os.path.join(self.config.model_save_folder, self.config.model_save_name))
+        torch.save(model.state_dict(), os.path.join(self.config.model_save_folder, self.config.model_save_name))
 
         self.logger.info("Model saved!")

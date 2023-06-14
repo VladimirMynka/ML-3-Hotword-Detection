@@ -17,3 +17,4 @@ class TrainConfig:
     gamma: float
 
     n_fft: int
+    size: tuple[int, int]

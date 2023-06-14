@@ -9,10 +9,10 @@ from torchvision.transforms import Resize
 
 
 class WavDataset(Dataset):
-    def __init__(self, df: pd.DataFrame, n_fft: int, logger: Logger):
+    def __init__(self, df: pd.DataFrame, n_fft: int, size: tuple[int, int], logger: Logger):
         self.df = df
         self.spectrogram = Spectrogram(n_fft)
-        self.resize = Resize(size=(224, 224))
+        self.resize = Resize(size)
 
         test_example, _ = self[0]
         logger.info(f"Dataset creation succeed. Output shape: {test_example.shape}")
