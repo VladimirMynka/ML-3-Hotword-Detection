@@ -1,8 +1,14 @@
-from src.config.classes import LoggerConfig
 import logging
+
+from src.config.classes import LoggerConfig
 
 
 def init_logging(config: LoggerConfig = None):
+    """
+    Configure logger for this project
+
+    :param config: config for logging
+    """
     if config is None:
         config = LoggerConfig()
     logging.basicConfig(

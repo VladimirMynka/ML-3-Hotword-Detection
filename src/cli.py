@@ -2,15 +2,22 @@ import logging
 
 from fire import Fire
 from src.config.config import config
-from src.realtime_listening.listener import Listener
-from src.train.train_pipeline import TrainPipeline
-from src.utils import init_logging
+from src.pipelines.realtime_listening.listener import Listener
+from src.pipelines.train.train_pipeline import TrainPipeline
+from src.pipelines.utils import init_logging
+from src.pipelines.static_audio_processing import HotWriteRecognizer
 
-from src.dataset_preparation.prepare_dataset_pipeline import PrepareDatasetPipeline
+from src.pipelines.dataset_preparation.prepare_dataset_pipeline import PrepareDatasetPipeline
 
 
-class Pipelines:
+class Cli:
+    """
+    Service input. All pipelines at one place
+    """
     def __init__(self):
+        """
+        Init logging for all pipelines
+        """
         init_logging(config.logger_config)
         self.logger = logging.getLogger()
 
@@ -24,7 +31,7 @@ class Pipelines:
 
     def get_stream(self):
         """
-        Connects to given online-stream and write it into data/night_stream.wav file
+        Connects to given online-stream and detect hot keys from it in real-time
         """
         pipeline = Listener(config.listen_config, logger=self.logger)
         pipeline.run()
@@ -32,11 +39,21 @@ class Pipelines:
     def train(self):
         """
         Train hot-words recognize model
-        :return:
         """
         pipeline = TrainPipeline(config.train_config, logger=self.logger)
         pipeline.run()
 
+    def static_audio_process(self):
+        """
+        Detect hot keys from stativ audio file
+        """
+        pipeline = HotWriteRecognizer(
+            config.static_audio_config.recognizer,
+            logger=self.logger,
+            path_to_audio=config.static_audio_config.path_to_audio
+        )
+        pipeline.run()
+
 
 if __name__ == "__main__":
-    Fire(Pipelines)
+    Fire(Cli)
