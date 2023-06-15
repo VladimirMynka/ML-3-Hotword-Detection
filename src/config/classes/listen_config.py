@@ -1,5 +1,6 @@
-import os
 from dataclasses import dataclass
+
+from src.config.classes import RecognizerConfig
 
 
 @dataclass
@@ -8,4 +9,5 @@ class ListenConfig:
     start_time: str
     retries: int
     sleep_time: float
-    output: str | os.PathLike
+
+    recognizer: RecognizerConfig

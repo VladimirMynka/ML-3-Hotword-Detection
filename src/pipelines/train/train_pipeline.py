@@ -14,16 +14,31 @@ from src.config.classes import TrainConfig
 
 
 class TrainPipeline(AbstractPipeline):
+    """
+    Train pipeline
+    """
     def __init__(self, config: TrainConfig, logger: Logger):
+        """
+        :param config: train config. See src/config/classes/train_pipeline
+        :param logger: logger object
+        """
         self.config = config
         self.logger = logger
 
     def run(self) -> None:
+        """
+        Run this pipeline. Load data, initialize model, train its, save its
+        """
         train_loader, val_loader = self.load_data()
         model = Model().to(self.config.device)
         self.train(model, train_loader, val_loader)
 
     def load_data(self) -> tuple[DataLoader, DataLoader]:
+        """
+        Load and prepare data
+
+        :return: train data loader, validation data loader
+        """
         train_path, val_path = self.config.train_path, self.config.val_path
 
         self.logger.info("Loading data...")
@@ -155,6 +170,11 @@ class TrainPipeline(AbstractPipeline):
                     self.save_model(model)
 
     def save_model(self, model: nn.Module):
+        """
+        Save model and log it
+
+        :param model: saving model
+        """
         os.makedirs(self.config.model_save_folder, exist_ok=True)
 
         self.logger.info("Saving model...")

@@ -14,8 +14,9 @@
 Available pipeline names:
 ```
 - prepare_dataset: Extracts one-second pieces of audio from given .wav-file and generate from them dataset. Put it into data/dataset
-- train: Train model for hot-word recognizing
-- get_stream: Await while stream is not ready and then listen it and writes into data/night_stream.wav file.
+- train: Trains model for hot-word recognizing
+- get_stream: Awaits while stream is not ready and then listen it and recognize hot-words in real-time
+- static_audio_process: Recognizes hot-words from already saved audio file. 
 ```
 
 ## Dataset
